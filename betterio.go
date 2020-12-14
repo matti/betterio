@@ -1,8 +1,28 @@
 package betterio
 
 import (
+	"bufio"
+	"bytes"
 	"io"
 )
+
+// ReadBytesUntilRune ...
+func ReadBytesUntilRune(reader io.Reader, r rune) []byte {
+	scanner := bufio.NewScanner(reader)
+	scanner.Split(bufio.ScanRunes)
+
+	buf := new(bytes.Buffer)
+
+	for scanner.Scan() {
+		buf.Write(scanner.Bytes())
+
+		if scanner.Bytes()[0] == byte(r) {
+			break
+		}
+	}
+
+	return buf.Bytes()
+}
 
 // CopyBidirUntilCloseAndReturnBytesWritten ...
 func CopyBidirUntilCloseAndReturnBytesWritten(c1 io.ReadWriteCloser, c2 io.ReadWriteCloser) (int64, int64) {
