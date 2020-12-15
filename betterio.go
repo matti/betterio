@@ -65,6 +65,7 @@ func copy(src io.ReadWriteCloser, dst io.ReadWriteCloser) int64 {
 }
 
 // CheckReaderOpen ...
+// from https://github.com/zendesk/go-sql-driver-mysql/blob/master/conncheck.go
 func CheckReaderOpen(conn io.Reader) error {
 	var errUnexpectedRead = errors.New("unexpected read")
 	var sysErr error
