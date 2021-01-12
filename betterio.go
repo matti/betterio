@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"errors"
 	"io"
+	"io/ioutil"
 	"syscall"
 )
 
@@ -99,4 +100,11 @@ func CheckReaderOpen(conn io.Reader) error {
 	}
 
 	return sysErr
+}
+
+// ReadAllString ...
+func ReadAllString(reader io.Reader) (string, error) {
+	bytes, err := ioutil.ReadAll(reader)
+
+	return string(bytes), err
 }
